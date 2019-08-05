@@ -1,10 +1,13 @@
 import React from 'react';
-
+import Hero from '../components/hero';
 import Layout from '../components/layout';
+import Identity from '../components/identity';
 
 const IndexPage = () => (
   <Layout>
-    <h1>Hello world!</h1>
+    <Hero>
+      <Identity />
+    </Hero>
   </Layout>
 );
 
