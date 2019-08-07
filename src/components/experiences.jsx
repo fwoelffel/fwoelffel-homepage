@@ -1,10 +1,13 @@
 import React from 'react';
 import TimelineItem from './timeline-item';
+import { FaPaperPlane } from 'react-icons/fa';
 
 const Experiences = () => (
   <section className='section'>
     <div className='container'>
-      <h2 className='title is-2'>Experiences</h2>
+      <h2 className='title is-2'>
+        <FaPaperPlane /> Experiences
+      </h2>
       <hr />
       <div className='timeline'>
         <TimelineItem

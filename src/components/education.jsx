@@ -1,10 +1,13 @@
 import React from 'react';
 import TimelineItem from './timeline-item';
+import { FaGraduationCap } from 'react-icons/fa';
 
 const Education = () => (
   <section className='section'>
     <div className='container'>
-      <h2 className='title is-2'>Education</h2>
+      <h2 className='title is-2'>
+        <FaGraduationCap /> Education
+      </h2>
       <hr />
       <div className='timeline'>
         <TimelineItem
