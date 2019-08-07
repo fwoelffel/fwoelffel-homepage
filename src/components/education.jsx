@@ -4,7 +4,7 @@ import TimelineItem from './timeline-item';
 const Education = () => (
   <section className='section'>
     <div className='container'>
-      <h2 className='title is-2'>Experiences</h2>
+      <h2 className='title is-2'>Education</h2>
       <hr />
       <div className='timeline'>
         <TimelineItem
