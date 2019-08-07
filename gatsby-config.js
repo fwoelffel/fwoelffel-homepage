@@ -1,11 +1,20 @@
 const fullName = 'Frédéric Woelffel';
 const shortName = 'F. Woelffel';
 const position = 'Back-end engineer';
+const {
+  NODE_ENV,
+  URL: NETLIFY_SITE_URL = 'https://fwoelffel.me',
+  DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
+  CONTEXT: NETLIFY_ENV = NODE_ENV
+} = process.env;
+const isNetlifyProduction = NETLIFY_ENV === 'production';
+const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
 
 module.exports = {
   siteMetadata: {
     title: fullName,
     position,
+    siteUrl,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -36,6 +45,27 @@ module.exports = {
       options: {
         trackingId: "UA-139958086-1",
       },
+    },
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        resolveEnv: () => NETLIFY_ENV,
+        env: {
+          production: {
+            policy: [{ userAgent: '*' }]
+          },
+          'branch-deploy': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null
+          },
+          'deploy-preview': {
+            policy: [{ userAgent: '*', disallow: ['/'] }],
+            sitemap: null,
+            host: null
+          }
+        }
+      }
     },
   ],
 }
