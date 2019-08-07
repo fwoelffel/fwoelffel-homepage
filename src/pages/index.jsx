@@ -10,8 +10,14 @@ const IndexPage = () => (
     <Hero>
       <Identity />
     </Hero>
-    <Experiences />
-    <Education />
+    <div className='columns'>
+      <div className='column'>
+        <Experiences />
+      </div>
+      <div className='column'>
+        <Education />
+      </div>
+    </div>
   </Layout>
 );
 
