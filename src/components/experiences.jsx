@@ -15,18 +15,24 @@ const Experiences = () => (
           end='Current'
           what='Backend engineer'
           where='IHU Strasbourg'
+          location='Strasbourg, France'
+          link='https://www.ihu-strasbourg.eu/'
         />
         <TimelineItem
           start='September 2013'
           end='August 2016'
           what='Apprenticeship'
           where='IRCAD France'
+          location='Strasbourg, France'
+          link='https://www.ircad.fr/'
         />
         <TimelineItem
           start='April 2013'
           end='June 2013'
           what='Internship'
           where='CIC-IT Nancy'
+          location='Nancy, France'
+          link='http://www.cic-it-nancy.fr/en/'
         />
       </div>
     </div>
