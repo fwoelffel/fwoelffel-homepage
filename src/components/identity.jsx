@@ -14,7 +14,7 @@ const query = graphql`
     }
     file(relativePath: { eq: "avatar.jpeg" }) {
       childImageSharp {
-        fixed(width: 200, height: 200) {
+        fixed(width: 200, height: 200, quality: 100) {
           ...GatsbyImageSharpFixed_tracedSVG
         }
       }
