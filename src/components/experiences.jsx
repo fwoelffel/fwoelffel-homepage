@@ -1,40 +1,45 @@
 import React from 'react';
 import TimelineItem from './timeline-item';
 import { FaPaperPlane } from 'react-icons/fa';
+import { graphql, useStaticQuery } from 'gatsby';
 
-const Experiences = () => (
-  <section className='section'>
-    <h2 className='title is-2'>
-      <FaPaperPlane /> Experiences
-    </h2>
-    <div className='is-divider' />
-    <div className='timeline'>
-      <TimelineItem
-        start='September 2016'
-        end='Current'
-        what='Backend engineer'
-        where='IHU Strasbourg'
-        location='Strasbourg, France'
-        link='https://www.ihu-strasbourg.eu/'
-      />
-      <TimelineItem
-        start='September 2013'
-        end='August 2016'
-        what='Apprenticeship'
-        where='IRCAD France'
-        location='Strasbourg, France'
-        link='https://www.ircad.fr/'
-      />
-      <TimelineItem
-        start='April 2013'
-        end='June 2013'
-        what='Internship'
-        where='CIC-IT Nancy'
-        location='Nancy, France'
-        link='http://www.cic-it-nancy.fr/en/'
-      />
-    </div>
-  </section>
-);
+const query = graphql`
+  query {
+    allExperiencesYaml {
+      nodes {
+        start
+        location
+        link
+        end
+        what
+        where
+      }
+    }
+  }
+`;
+
+const Experiences = () => {
+  const { allExperiencesYaml } = useStaticQuery(query);
+  return (
+    <section className='section'>
+      <h2 className='title is-2'>
+        <FaPaperPlane /> Experiences
+      </h2>
+      <div className='is-divider' />
+      <div className='timeline'>
+        {allExperiencesYaml.nodes.map((experience) => (
+          <TimelineItem
+            start={experience.start}
+            end={experience.end}
+            what={experience.what}
+            where={experience.where}
+            location={experience.location}
+            link={experience.link}
+          />
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default Experiences;
