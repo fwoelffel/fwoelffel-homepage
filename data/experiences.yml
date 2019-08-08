@@ -1,9 +1,12 @@
 - start: September 2016
   end: Current
-  what: Backend engineer
-  where: IHU Strasbourg
+  what: R&D engineer
+  where: IHU Institute of Image-Guided Surgery Strasbourg
   location: Strasbourg, France
   link: https://www.ihu-strasbourg.eu/
+  description:
+    Backend design and implementation of the "control tower" part of the CONDOR project.
+    Like in aeronautics, this projects aims, among others, at the development of a “control tower" of operating rooms via new real-time steering, communication, recording, exploitation and automatization applications.
   
 - start: September 2013
   end: August 2016
@@ -11,10 +14,15 @@
   where: IRCAD France
   location: Strasbourg, France
   link: https://www.ircad.fr/
-  
+  description:
+    Backend design and implementation of a custom storage system tailored for the data produced by the IRCAD R&D team's research activities.
+
 - start: April 2013
   end: June 2013
   what: Internship
   where: CIC-IT Nancy
   location: Nancy, France
   link: http://www.cic-it-nancy.fr/en/
+  description:
+    Design and implementation of a plugin providing semi-automated MRI artifacts detection and quantification for ORS Visual, a medical imaging solution.
+

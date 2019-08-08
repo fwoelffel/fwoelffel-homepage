@@ -1,5 +1,6 @@
 import React from 'react';
 import ExternalLink from './external-link';
+import styles from './timeline-item.module.scss';
 
 const TimelineItem = ({
   start,
@@ -22,7 +23,7 @@ const TimelineItem = ({
         {!!link ? <ExternalLink to={link}>{where}</ExternalLink> : where}
       </span>
       <span className='is-size-7'>{!!location ? ' - ' + location : null}</span>
-      {!!description ? <div>{description}</div> : null}
+      {!!description ? <div className={'has-text-justified ' + styles.description}>{description}</div> : null}
     </div>
   </div>
 );

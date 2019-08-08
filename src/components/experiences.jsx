@@ -13,6 +13,7 @@ const query = graphql`
         end
         what
         where
+        description
       }
     }
   }
@@ -35,7 +36,9 @@ const Experiences = () => {
             where={experience.where}
             location={experience.location}
             link={experience.link}
-          />
+          >
+            {experience.description}
+          </TimelineItem>
         ))}
       </div>
     </section>
