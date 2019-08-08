@@ -1,4 +1,5 @@
 import React from 'react';
+import ExternalLink from './external-link';
 
 const TimelineItem = ({
   start,
@@ -18,13 +19,7 @@ const TimelineItem = ({
       <span className='title is-6'>{what}</span>
       <br />
       <span className='title is-7'>
-        {!!link ? (
-          <a href={link} target='_blank' rel='noopener noreferrer'>
-            {where}
-          </a>
-        ) : (
-          where
-        )}
+        {!!link ? <ExternalLink to={link}>{where}</ExternalLink> : where}
       </span>
       <span style={{ 'font-size': '0.8em' }}>
         {!!location ? ' - ' + location : null}

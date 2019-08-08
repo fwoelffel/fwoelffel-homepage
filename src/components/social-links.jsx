@@ -1,37 +1,30 @@
 import React from 'react';
 import { FaEnvelope, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import styles from './social-links.module.scss';
+import ExternalLink from './external-link';
 
 const SocialLinks = ({ size = '2.5em' }) => (
   <div className='is-block'>
-    <a
+    <ExternalLink
       className={styles.socialLink}
-      href='https://www.linkedin.com/in/fredericwoelffel/'
-      target='_blank'
-      rel='noopener noreferrer'>
+      to='https://www.linkedin.com/in/fredericwoelffel/'>
       <FaLinkedin size={size} />
-    </a>
-    <a
+    </ExternalLink>
+    <ExternalLink
       className={styles.socialLink}
-      href='https://twitter.com/fwoelffel'
-      target='_blank'
-      rel='noopener noreferrer'>
+      to='https://twitter.com/fwoelffel'>
       <FaTwitter size={size} />
-    </a>
-    <a
+    </ExternalLink>
+    <ExternalLink
       className={styles.socialLink}
-      href='https://github.com/fwoelffel'
-      target='_blank'
-      rel='noopener noreferrer'>
+      to='https://github.com/fwoelffel'>
       <FaGithub size={size} />
-    </a>
-    <a
+    </ExternalLink>
+    <ExternalLink
       className={styles.socialLink}
-      href='https://frdricwoelffel.typeform.com/to/TgRdLj'
-      target='_blank'
-      rel='noopener noreferrer'>
+      to='https://frdricwoelffel.typeform.com/to/TgRdLj'>
       <FaEnvelope size={size} />
-    </a>
+    </ExternalLink>
   </div>
 );
 
