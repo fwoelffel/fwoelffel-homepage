@@ -4,6 +4,7 @@
   "author": "Frédéric Woelffel <hello@fwoelffel.me>",
   "dependencies": {
     "bulma": "^0.7.5",
+    "bulma-divider": "^0.2.0",
     "bulma-timeline": "^3.0.4",
     "gatsby": "^2.13.50",
     "gatsby-image": "^2.2.8",

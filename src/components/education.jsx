@@ -8,7 +8,7 @@ const Education = () => (
       <h2 className='title is-2'>
         <FaGraduationCap /> Education
       </h2>
-      <hr />
+      <div className='is-divider' />
       <div className='timeline'>
         <TimelineItem
           start='September 2013'
