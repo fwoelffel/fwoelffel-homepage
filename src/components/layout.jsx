@@ -11,7 +11,7 @@ const Layout = ({ children }) => (
       <title>Frédéric Woelffel</title>
       <link rel='canonical' href='https://fwoelffel.me' />
     </Helmet>
-    <div>{children}</div>
+    <div className='container'>{children}</div>
     <Footer />
   </>
 );
