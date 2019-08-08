@@ -15,6 +15,9 @@ const Footer = () => {
   return (
     <footer className={'footer has-text-centered'}>
       <div className='container'>Last built {buildTime}</div>
+      <span className='is-size-7 has-text-grey is-family-secondary'>
+        ©{new Date().getFullYear()} Frédéric Woelffel
+      </span>
     </footer>
   );
 };
