@@ -21,10 +21,8 @@ const TimelineItem = ({
       <span className='title is-7'>
         {!!link ? <ExternalLink to={link}>{where}</ExternalLink> : where}
       </span>
-      <span className='is-size-7'>
-        {!!location ? ' - ' + location : null}
-      </span>
-      <div>{description}</div>
+      <span className='is-size-7'>{!!location ? ' - ' + location : null}</span>
+      {!!description ? <div>{description}</div> : null}
     </div>
   </div>
 );
