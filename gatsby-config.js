@@ -16,7 +16,7 @@ module.exports = {
     position,
     siteUrl,
     about:
-      `I'm an expert Node.js and javascript/typescript developer.`,
+      `I'm a Node.js expert and javascript/typescript developer, fluent with Nestjs.`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
