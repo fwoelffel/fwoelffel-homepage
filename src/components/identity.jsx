@@ -10,6 +10,7 @@ const query = graphql`
       siteMetadata {
         position
         title
+        about
       }
     }
     file(relativePath: { eq: "avatar.jpeg" }) {
@@ -24,7 +25,7 @@ const query = graphql`
 
 const Identity = () => {
   const { site, file } = useStaticQuery(query);
-  const { position, title } = site.siteMetadata;
+  const { position, title, about } = site.siteMetadata;
   return (
     <div className='has-text-centered'>
       <Img
@@ -35,6 +36,11 @@ const Identity = () => {
       <h1 className='title is-1 is-spaced is-uppercase'>{title}</h1>
       <h2 className='subtitle'>{position}</h2>
       <SocialLinks />
+      {!!about ? (
+        <div className={styles.about + ' has-text-centered is-family-code'}>
+          {about}
+        </div>
+      ) : null}
     </div>
   );
 };

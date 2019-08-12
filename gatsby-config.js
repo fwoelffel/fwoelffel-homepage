@@ -15,6 +15,8 @@ module.exports = {
     title: fullName,
     position,
     siteUrl,
+    about:
+      `I'm an expert Node.js and javascript/typescript developer.`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

@@ -35,8 +35,7 @@ const Experiences = () => {
             what={experience.what}
             where={experience.where}
             location={experience.location}
-            link={experience.link}
-          >
+            link={experience.link}>
             {experience.description}
           </TimelineItem>
         ))}
