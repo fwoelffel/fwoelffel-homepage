@@ -6,6 +6,7 @@ import Experiences from '../components/experiences';
 import Education from '../components/education';
 import Skills from '../components/skills';
 import Achievements from '../components/achievements';
+import Projects from '../components/projects';
 
 const IndexPage = () => (
   <Layout>
@@ -22,6 +23,7 @@ const IndexPage = () => (
       </div>
     </div>
     <Achievements />
+    <Projects />
   </Layout>
 );
 

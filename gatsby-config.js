@@ -5,7 +5,8 @@ const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = 'https://fwoelffel.me',
   DEPLOY_PRIME_URL: NETLIFY_DEPLOY_URL = NETLIFY_SITE_URL,
-  CONTEXT: NETLIFY_ENV = NODE_ENV
+  CONTEXT: NETLIFY_ENV = NODE_ENV,
+  GITHUB_TOKEN,
 } = process.env;
 const isNetlifyProduction = NETLIFY_ENV === 'production';
 const siteUrl = isNetlifyProduction ? NETLIFY_SITE_URL : NETLIFY_DEPLOY_URL;
@@ -77,5 +78,16 @@ module.exports = {
       }
     },
     'gatsby-transformer-yaml',
+    {
+      resolve: "gatsby-source-graphql",
+      options: {
+        typeName: "GitHub",
+        fieldName: "github",
+        url: "https://api.github.com/graphql",
+        headers: {
+          Authorization: `Bearer ${GITHUB_TOKEN}`,
+        },
+      },
+    },
   ],
 }
