@@ -6,17 +6,22 @@ import ExternalLink from './external-link';
 
 const query = graphql`
   query {
-    project: github {
-      repository(owner: "nestjsx", name: "nest-bull") {
-        name
-        description
-        stargazers {
-          totalCount
-        }
-        forkCount
-        url
-        primaryLanguage {
-          name
+    github {
+      viewer {
+        pinnedRepositories(first: 6) {
+          nodes {
+            nameWithOwner
+            url
+            stargazers {
+              totalCount
+            }
+            primaryLanguage {
+              name
+            }
+            name
+            forkCount
+            description
+          }
         }
       }
     }
@@ -56,24 +61,26 @@ const Project = ({
 );
 
 const Projects = () => {
-  const { project } = useStaticQuery(query);
+  const { github } = useStaticQuery(query);
   return (
     <section className='section'>
       <h2 className='title is-2'>
         <FaCodeBranch /> Projects
       </h2>
       <div className='is-divider' />
-      <div className='columns'>
-        <div className='column is-one-quarter'>
-          <Project
-            title={project.repository.name}
-            description={project.repository.description}
-            link={project.repository.url}
-            forks={project.repository.forkCount}
-            mainLanguage={project.repository.primaryLanguage.name}
-            stargazers={project.repository.stargazers.totalCount}
-          />
-        </div>
+      <div className='columns is-multiline'>
+        {github.viewer.pinnedRepositories.nodes.map((repository) => (
+          <div className='column is-one-third'>
+            <Project
+              title={repository.name}
+              description={repository.description}
+              link={repository.url}
+              forks={repository.forkCount}
+              mainLanguage={repository.primaryLanguage.name}
+              stargazers={repository.stargazers.totalCount}
+            />
+          </div>
+        ))}
       </div>
     </section>
   );
