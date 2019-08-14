@@ -1,6 +1,9 @@
 const fullName = 'Frédéric Woelffel';
 const shortName = 'F. Woelffel';
 const position = 'Back-end engineer';
+require('dotenv').config({
+  path: `.env`,
+});
 const {
   NODE_ENV,
   URL: NETLIFY_SITE_URL = 'https://fwoelffel.me',
@@ -16,8 +19,7 @@ module.exports = {
     title: fullName,
     position,
     siteUrl,
-    about:
-      `I'm a Node.js expert and javascript/typescript developer, fluent with Nestjs.`,
+    about: `I'm a Node.js expert and javascript/typescript developer, fluent with Nestjs.`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -53,7 +55,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-139958086-1",
+        trackingId: 'UA-139958086-1',
       },
     },
     {
@@ -62,32 +64,32 @@ module.exports = {
         resolveEnv: () => NETLIFY_ENV,
         env: {
           production: {
-            policy: [{ userAgent: '*' }]
+            policy: [{ userAgent: '*' }],
           },
           'branch-deploy': {
             policy: [{ userAgent: '*', disallow: ['/'] }],
             sitemap: null,
-            host: null
+            host: null,
           },
           'deploy-preview': {
             policy: [{ userAgent: '*', disallow: ['/'] }],
             sitemap: null,
-            host: null
-          }
-        }
-      }
+            host: null,
+          },
+        },
+      },
     },
     'gatsby-transformer-yaml',
     {
-      resolve: "gatsby-source-graphql",
+      resolve: 'gatsby-source-graphql',
       options: {
-        typeName: "GitHub",
-        fieldName: "github",
-        url: "https://api.github.com/graphql",
+        typeName: 'GitHub',
+        fieldName: 'github',
+        url: 'https://api.github.com/graphql',
         headers: {
           Authorization: `Bearer ${GITHUB_TOKEN}`,
         },
       },
     },
   ],
-}
+};
