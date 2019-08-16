@@ -3,6 +3,11 @@
   description:
     "I've had the chance to join the NestJSx team on github.
     I'll do my best to make my stay there worthwhile and help the NestJS' ecosystem to thrive!"
+- title: JDEV 2017
+  date: July 2017
+  description:
+    The JDEV, which stands for "national development (as in software development) days", is a French convention bringing software engineer and research engineer together.
+    This year, it took place in Marseille and I went there to give a speech about countinuous integration in a microservices environment and animate two Docker workshops.
 - title: Strasbourg's 2016 Hacking Health Camp
   date: March 2016
   description:
