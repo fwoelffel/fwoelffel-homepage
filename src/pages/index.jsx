@@ -14,7 +14,7 @@ const IndexPage = () => (
       <Identity />
     </Hero>
     <Skills />
-    <div className='columns'>
+    <div className='columns is-gapless'>
       <div className='column'>
         <Experiences />
       </div>
