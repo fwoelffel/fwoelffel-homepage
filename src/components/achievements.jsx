@@ -33,7 +33,7 @@ const Achievements = () => {
       <div className='is-divider' />
       <ul>
         {allAchievementsYaml.nodes.map((achievement, index) => (
-          <>
+          <li>
             <Achievement
               title={achievement.title}
               description={achievement.description}
@@ -42,7 +42,7 @@ const Achievements = () => {
             {index < allAchievementsYaml.nodes.length - 1 ? (
               <hr className={styles.separator} />
             ) : null}
-          </>
+          </li>
         ))}
       </ul>
     </section>
