@@ -71,21 +71,29 @@ const Project = ({
         }}>
         <div className='level-left'>
           <span>
-            <GoCode />
+            <span style={{ 'margin-right': '2px', 'vertical-align': 'middle' }}>
+              <GoCode />
+            </span>
             {mainLanguage}
           </span>
         </div>
         <div className='level-right' style={{ 'margin-top': '0' }}>
           <span>
-            <GoEye />
+            <span style={{ 'margin-right': '2px', 'vertical-align': 'middle' }}>
+              <GoEye />
+            </span>
             {watchers}
           </span>
           <span style={{ 'margin-left': '15px' }}>
-            <GoGitBranch />
+            <span style={{ 'margin-right': '2px', 'vertical-align': 'middle' }}>
+              <GoGitBranch />
+            </span>
             {forks}
           </span>
           <span style={{ 'margin-left': '15px' }}>
-            <GoStar />
+            <span style={{ 'margin-right': '2px', 'vertical-align': 'middle' }}>
+              <GoStar />
+            </span>
             {stargazers}
           </span>
         </div>
