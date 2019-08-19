@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 const Layout = ({ children }) => (
   <>
     <Helmet>
+      <html lang='en'/>
       <meta charSet='utf-8' />
       <meta name='description' content='Backend engineer' />
       <meta name='author' content='Frédéric Woelffel' />
