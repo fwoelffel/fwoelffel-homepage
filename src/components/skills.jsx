@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaFlask } from 'react-icons/fa';
+import React, { Component } from 'react';
+import { FaFlask, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { graphql, useStaticQuery } from 'gatsby';
 
 const query = graphql`
@@ -25,32 +25,75 @@ const SkillBar = ({ name, level }) => (
   </>
 );
 
-const Skills = () => {
-  const { allSkillsYaml } = useStaticQuery(query);
-  return (
-    <section className='section'>
-      <h2 className='title is-2'>
-        <FaFlask /> Skills
-      </h2>
-      <div className='is-divider' />
-      <div className='columns'>
-        <div className='column'>
-          {allSkillsYaml.nodes
-            .slice(0, Math.ceil(allSkillsYaml.nodes.length / 2))
-            .map(({ name, value }) => (
-              <SkillBar name={name} level={value} />
-            ))}
-        </div>
-        <div className='column'>
-          {allSkillsYaml.nodes
-            .slice(Math.ceil(allSkillsYaml.nodes.length / 2))
-            .map(({ name, value }) => (
-              <SkillBar name={name} level={value} />
-            ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+class Skills extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      skills: props.skills,
+      isCollapsed: true,
+    };
+    this.toggleState = this.toggleState.bind(this);
+  }
 
-export default Skills;
+  toggleState() {
+    this.setState((prevState) => ({
+      ...prevState,
+      isCollapsed: !prevState.isCollapsed,
+    }));
+  }
+
+  get skills() {
+    return this.state.isCollapsed
+      ? this.state.skills.slice(0, Math.floor(this.state.skills.length / 2))
+      : this.state.skills;
+  }
+
+  render() {
+    return (
+      <section className='section'>
+        <h2 className='title is-2'>
+          <FaFlask /> Skills
+        </h2>
+        <div className='is-divider' />
+        <div className='columns'>
+          <div className='column'>
+            {this.skills
+              .slice(0, Math.ceil(this.skills.length / 2))
+              .map(({ name, value }) => (
+                <SkillBar name={name} level={value} />
+              ))}
+          </div>
+          <div className='column'>
+            {this.skills
+              .slice(Math.ceil(this.skills.length / 2))
+              .map(({ name, value }) => (
+                <SkillBar name={name} level={value} />
+              ))}
+          </div>
+        </div>
+        <div onClick={this.toggleState}>
+          {this.state.isCollapsed ? (
+            <>
+              <span className='level-item'>Show more</span>
+              <span className='level-item'>
+                <FaAngleDown />
+              </span>
+            </>
+          ) : (
+            <>
+              <span className='level-item'>Show less</span>
+              <span className='level-item'>
+                <FaAngleUp />
+              </span>
+            </>
+          )}
+        </div>
+      </section>
+    );
+  }
+}
+
+export default (props) => {
+  const skills = useStaticQuery(query).allSkillsYaml.nodes;
+  return <Skills {...props} skills={skills} />;
+};
