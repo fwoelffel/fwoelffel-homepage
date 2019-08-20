@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FaFlask, FaAngleDown, FaAngleUp } from 'react-icons/fa';
+import { FaFlask, FaAngleDoubleDown, FaAngleDoubleUp } from 'react-icons/fa';
 import { graphql, useStaticQuery } from 'gatsby';
 
 const query = graphql`
@@ -71,20 +71,23 @@ class Skills extends Component {
               ))}
           </div>
         </div>
-        <div onClick={this.toggleState}>
+        <div
+          style={{ display: 'flex', 'flex-direction': 'column' }}
+          className='has-text-centered has-text-grey-light is-size-7'
+          onClick={this.toggleState}>
           {this.state.isCollapsed ? (
             <>
-              <span className='level-item'>Show more</span>
-              <span className='level-item'>
-                <FaAngleDown />
+              <span>Show more</span>
+              <span>
+                <FaAngleDoubleDown />
               </span>
             </>
           ) : (
             <>
-              <span className='level-item'>Show less</span>
-              <span className='level-item'>
-                <FaAngleUp />
+              <span>
+                <FaAngleDoubleUp />
               </span>
+              <span>Show less</span>
             </>
           )}
         </div>
