@@ -29,7 +29,10 @@ class Skills extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      skills: props.skills,
+      shownSkills: this.props.skills.slice(
+        0,
+        Math.floor(this.props.skills.length / 2),
+      ),
       isCollapsed: true,
     };
     this.toggleState = this.toggleState.bind(this);
@@ -37,15 +40,11 @@ class Skills extends Component {
 
   toggleState() {
     this.setState((prevState) => ({
-      ...prevState,
+      shownSkills: prevState.isCollapsed
+        ? this.props.skills
+        : this.props.skills.slice(0, Math.floor(this.props.skills.length / 2)),
       isCollapsed: !prevState.isCollapsed,
     }));
-  }
-
-  get skills() {
-    return this.state.isCollapsed
-      ? this.state.skills.slice(0, Math.floor(this.state.skills.length / 2))
-      : this.state.skills;
   }
 
   render() {
@@ -57,15 +56,15 @@ class Skills extends Component {
         <div className='is-divider' />
         <div className='columns'>
           <div className='column'>
-            {this.skills
-              .slice(0, Math.ceil(this.skills.length / 2))
+            {this.state.shownSkills
+              .slice(0, Math.ceil(this.state.shownSkills.length / 2))
               .map(({ name, value }) => (
                 <SkillBar name={name} level={value} />
               ))}
           </div>
           <div className='column'>
-            {this.skills
-              .slice(Math.ceil(this.skills.length / 2))
+            {this.state.shownSkills
+              .slice(Math.ceil(this.state.shownSkills.length / 2))
               .map(({ name, value }) => (
                 <SkillBar name={name} level={value} />
               ))}
