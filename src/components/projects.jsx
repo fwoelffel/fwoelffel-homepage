@@ -8,28 +8,30 @@ const query = graphql`
   query {
     github {
       viewer {
-        pinnedRepositories(first: 6) {
+        pinnedItems(first: 6) {
           nodes {
-            nameWithOwner
-            url
-            stargazers {
-              totalCount
-            }
-            primaryLanguage {
+            ... on GitHub_Repository {
+              nameWithOwner
+              url
+              stargazers {
+                totalCount
+              }
+              primaryLanguage {
+                name
+              }
               name
-            }
-            name
-            forkCount
-            description
-            repositoryTopics(first: 5) {
-              nodes {
-                topic {
-                  name
+              forkCount
+              description
+              repositoryTopics(first: 5) {
+                nodes {
+                  topic {
+                    name
+                  }
                 }
               }
-            }
-            watchers {
-              totalCount
+              watchers {
+                totalCount
+              }
             }
           }
         }
@@ -111,7 +113,7 @@ const Projects = () => {
       </h2>
       <div className='is-divider' />
       <div className='columns is-multiline'>
-        {github.viewer.pinnedRepositories.nodes.map((repository) => (
+        {github.viewer.pinnedItems.nodes.map((repository) => (
           <div className='column is-one-third'>
             <Project
               title={repository.name}
