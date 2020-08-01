@@ -4,7 +4,6 @@ import Layout from '../components/layout';
 import Identity from '../components/identity';
 import Experiences from '../components/experiences';
 import Education from '../components/education';
-import Skills from '../components/skills';
 import Achievements from '../components/achievements';
 import Projects from '../components/projects';
 
@@ -13,6 +12,7 @@ const IndexPage = () => (
     <Hero>
       <Identity />
     </Hero>
+    <Projects />
     <div className='columns is-gapless'>
       <div className='column'>
         <Experiences />
@@ -22,7 +22,6 @@ const IndexPage = () => (
       </div>
     </div>
     <Achievements />
-    <Projects />
   </Layout>
 );
 
