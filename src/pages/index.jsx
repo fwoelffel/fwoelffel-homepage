@@ -13,6 +13,7 @@ const IndexPage = () => (
       <Identity />
     </Hero>
     <Projects />
+    <Achievements />
     <div className='columns is-gapless'>
       <div className='column'>
         <Experiences />
@@ -21,7 +22,6 @@ const IndexPage = () => (
         <Education />
       </div>
     </div>
-    <Achievements />
   </Layout>
 );
 
