@@ -50,7 +50,12 @@ module.exports = {
         icon: `src/images/favicon.png`,
       },
     },
-    'gatsby-plugin-sass',
+    {
+       resolve: 'gatsby-plugin-sass',
+       options: {
+        implementation: require('sass'),
+       },
+    },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {

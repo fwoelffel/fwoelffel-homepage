@@ -2,7 +2,7 @@
   "name": "fwoelffel-default",
   "private": true,
   "author": "Frédéric Woelffel <hello@fwoelffel.me>",
-  "dependencies": {
+  "devDependencies": {
     "bulma": "0.9.1",
     "bulma-divider": "0.2.0",
     "bulma-timeline": "3.0.4",
@@ -19,15 +19,13 @@
     "gatsby-source-graphql": "2.8.0",
     "gatsby-transformer-sharp": "2.6.0",
     "gatsby-transformer-yaml": "2.5.0",
-    "node-sass": "5.0.0",
+    "prettier": "2.1.2",
     "prop-types": "15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-helmet": "6.1.0",
-    "react-icons": "3.11.0"
-  },
-  "devDependencies": {
-    "prettier": "2.1.2"
+    "react-icons": "3.11.0",
+    "sass": "1.29.0"
   },
   "license": "MIT",
   "scripts": {
