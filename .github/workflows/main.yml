@@ -1,11 +1,96 @@
-name: Netlify
+name: Build and Deploy
 
 on:
   schedule:
-    - cron:  '0 */12 * * *'
+    - cron:  '0 * * * *'
+  workflow_dispatch:
+    inputs:
+      ignore-dep-cache:
+        description: Ignore dependencies cache (`true` to enable)
+        default: 'false'
+  push:
 
 jobs:
-  trigger-deploy:
+  cancel-previous:
+    name: Cancel previous runs
     runs-on: ubuntu-latest
     steps:
-      - run: curl -X POST -d {} https://api.netlify.com/build_hooks/${{ secrets.NETLIFY_HOOK_ID }}
+      - uses: styfle/cancel-workflow-action@0.6.0
+        with:
+          access_token: ${{ github.token }}
+  dependencies:
+    name: Cache dependencies
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Look up dependencies in cache
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: node_modules/
+        key: ${{ hashFiles('package-lock.json') }}
+    - name: Install dependencies
+      if: ${{ 'true' == github.event.inputs.ignore-dep-cache || 'true' != steps.cache.outputs.cache-hit }}
+      run: npm ci
+  build:
+    name: Build
+    needs: dependencies
+    runs-on: ubuntu-latest
+    if: ${{ 'success' == needs.dependencies.result }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup NodeJS   
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14'
+    - name: Look up dependencies in cache
+      id: cache
+      uses: actions/cache@v2
+      with:
+        path: node_modules/
+        key: ${{ hashFiles('package-lock.json') }}
+    - name: Build
+      run: npm run build
+      env:
+        PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
+        GRAPHQL_URL: https://api.github.com/graphql
+        GRAPHQL_TOKEN: ${{ secrets.GRAPHQL_TOKEN }}
+        GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: build
+        path: public
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ 'success' == needs.build.result }}
+    steps:
+    - name: Create GitHub deployment
+      id: deployment
+      uses: chrnorm/deployment-action@releases/v1
+      with:
+        token: ${{ github.token }}
+        target_url: ${{ secrets.PUBLIC_URL }}
+    - name: Download build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: build
+        path: public
+    - name: Deploy to Netlify
+      uses: netlify/actions/cli@master
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      with:
+        args: deploy --dir=public --prod
+    - name: Update deployment status
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: ${{ github.token }}
+        target_url: ${{ secrets.PUBLIC_URL }}
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+        state: ${{ job.status }}
