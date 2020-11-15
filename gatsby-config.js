@@ -1,12 +1,8 @@
-require('dotenv').config({
-  path: `.env`,
-});
-
 const {
-  GRAPHQL_URL,
-  GRAPHQL_TOKEN,
+  GRAPHQL_URL = 'https://api.github.com/graphql',
+  GRAPHQL_TOKEN = process.env.GITHUB_TOKEN,
+  PUBLIC_URL = 'http://localhost:8000',
   GOOGLE_ANALYTICS_ID,
-  PUBLIC_URL = 'https://fwoelffel.me',
 } = process.env;
 
 const fullName = 'Frédéric Woelffel';
