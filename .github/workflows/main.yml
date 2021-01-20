@@ -11,13 +11,15 @@ on:
   push:
 
 jobs:
+
   cancel-previous:
     name: Cancel previous runs
     runs-on: ubuntu-latest
     steps:
-      - uses: styfle/cancel-workflow-action@0.7.0
+      - uses: styfle/cancel-workflow-action@0.6.0
         with:
           access_token: ${{ github.token }}
+
   dependencies:
     name: Cache dependencies
     runs-on: ubuntu-latest
@@ -33,6 +35,7 @@ jobs:
     - name: Install dependencies
       if: ${{ 'true' == github.event.inputs.ignore-dep-cache || 'true' != steps.cache.outputs.cache-hit }}
       run: npm ci
+
   build:
     name: Build
     needs: dependencies
@@ -63,34 +66,24 @@ jobs:
       with:
         name: build
         path: public
+
   deploy:
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
     if: ${{ 'success' == needs.build.result }}
     steps:
-    - name: Create GitHub deployment
-      id: deployment
-      uses: chrnorm/deployment-action@releases/v1
-      with:
-        token: ${{ github.token }}
-        target_url: ${{ secrets.PUBLIC_URL }}
     - name: Download build artifact
       uses: actions/download-artifact@v2
       with:
         name: build
         path: public
-    - name: Deploy to Netlify
-      uses: netlify/actions/cli@master
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    - name: Deploy to Github Pages
+      uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
-        args: deploy --dir=public --prod
-    - name: Update deployment status
-      uses: chrnorm/deployment-status@releases/v1
-      with:
-        token: ${{ github.token }}
-        target_url: ${{ secrets.PUBLIC_URL }}
-        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-        state: ${{ job.status }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: public
+        CLEAN: true
+        SINGLE_COMMIT: true
+        COMMIT_MESSAGE: 'chore: deploy to Github Pages from ${{ github.sha }}'
