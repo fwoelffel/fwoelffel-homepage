@@ -60,7 +60,6 @@ jobs:
         PUBLIC_URL: ${{ secrets.PUBLIC_URL }}
         GRAPHQL_URL: https://api.github.com/graphql
         GRAPHQL_TOKEN: ${{ secrets.GRAPHQL_TOKEN }}
-        GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
     - name: Upload build artifact
       uses: actions/upload-artifact@v2
       with:

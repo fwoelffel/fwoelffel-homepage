@@ -2,7 +2,6 @@ const {
   GRAPHQL_URL = 'https://api.github.com/graphql',
   GRAPHQL_TOKEN = process.env.GITHUB_TOKEN,
   PUBLIC_URL = 'http://localhost:8000',
-  GOOGLE_ANALYTICS_ID,
 } = process.env;
 
 const fullName = 'Frédéric Woelffel';
@@ -51,12 +50,6 @@ module.exports = {
        options: {
         implementation: require('sass'),
        },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: GOOGLE_ANALYTICS_ID,
-      },
     },
     'gatsby-transformer-yaml',
     {
