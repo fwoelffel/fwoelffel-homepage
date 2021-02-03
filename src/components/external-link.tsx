@@ -5,7 +5,7 @@ const ExternalLink = ({ label, to, children, className }) => (
     className={className}
     href={to}
     target='_blank'
-    rel='noopener noreferrer'
+    rel='noopener noreferrer nofollow'
     aria-label={label}>
     {children}
   </a>
