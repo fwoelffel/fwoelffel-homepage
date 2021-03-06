@@ -71,6 +71,8 @@ jobs:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Download build artifact
       uses: actions/download-artifact@v2
       with:
@@ -79,9 +81,9 @@ jobs:
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@4.1.0
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: public
-        CLEAN: true
-        SINGLE_COMMIT: true
-        COMMIT_MESSAGE: 'chore: deploy to Github Pages from ${{ github.sha }}'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
+        folder: public
+        clean: true
+        single-commit: true
+        commit-message: 'chore: deploy to Github Pages from ${{ github.sha }}'
